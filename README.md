@@ -6,8 +6,7 @@ Status: Active Development
 ## About
 
 The main goal of this project is to provide a tested environment for a fast api endpoint creation. 
-The project should automatically create the required php files and ensure that also a minimum quality standard is provied.
-
+The project will automatically create the required php files and ensure that also a minimum quality standard is provided.
 
 This packages will help you create:
 
