@@ -11,6 +11,43 @@ abstract class TestPackageCase extends TestCase
     public $permissions = [];
     public $role = null;
     public $roles = [];
+
+    public array  $createPermissions = [];
+    public String $createRoleName = "";
+    public String $createEndpointName = "";
+    
+    /**
+     * Helper method to prepare controller testings
+     *
+     * @return void
+     */
+    public function prepareControllerTesting():void {
+        if ($this->createUsers === true) {
+
+            $userClass = config('ambersive-api.models.model_user', \AMBERSIVE\Api\Models\User::class);
+
+            $this->createdUsers['allRights'] = factory($userClass)->create([
+                'username'          => 'Default',
+                'email'             => 'test@test.com',
+                'email_verified_at' => now(),
+                'password'          => bcrypt("testtest"),
+                'active'            => true,
+                'locked'            => false
+            ]);
+
+            $this->createdUsers['noRights'] = factory($userClass)->create([
+                'username'          => 'Default',
+                'email'             => 'test@test2.com',
+                'email_verified_at' => now(),
+                'password'          => bcrypt("testtest"),
+                'active'            => true,
+                'locked'            => false
+            ]);
+
+            $permissions = $this->generatePermission($this->createEndpointName, $this->createPermissions, $this->createRoleName, [$this->createdUsers['allRights']]);
+
+        }
+    }
     
     /**
      * Generate a list of roles
@@ -95,11 +132,13 @@ abstract class TestPackageCase extends TestCase
     /**
      * Execute the default test for models
      */
-    public function executeModelDefaultTest($modelClass = null){
+    public function executeModelDefaultTest($modelClass = null, Callable $callback){
 
         $this->assertNotNull($modelClass);
 
-        // TODO: Write useful test
+        if ($callback){
+            $callback($this, $modelClass);
+        }
 
     }
 
