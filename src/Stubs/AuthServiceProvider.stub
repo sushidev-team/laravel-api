@@ -1,0 +1,43 @@
+<?php
+
+namespace App\Providers;
+
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
+
+#region [CUSTOM:IMPORTS]
+{{customImports}}
+#endregion [CUSTOM:IMPORTS]
+
+class AuthServiceProvider extends ServiceProvider
+{
+    /**
+     * The policy mappings for the application.
+     *
+     * @var array
+     */
+    protected $policies = [
+       #region [CUSTOM:POLICIES]
+       {{customPolicies}}
+       #endregion [CUSTOM:POLICIES]
+       {{policies}}
+    ];
+
+    /**
+     * Register any authentication / authorization services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        $this->registerPolicies();
+
+        #region [CUSTOM:BOOT]
+        {{customBoot}}
+        #endregion [CUSTOM:BOOT]
+    }
+
+    #region [CUSTOM:CODE]
+    {{customCode}}
+    #endregion [CUSTOM:CODE]
+}

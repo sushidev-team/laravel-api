@@ -1,0 +1,13 @@
+model: \App\Models\Users\User
+entries:
+    484920fb-244b-4fb8-8fed-3bf0e900a3d2:
+        username: Administrator
+        firstname: System
+        lastname: Administrator
+        password_raw: asdfasdf
+        email: office@AMBERSIVE.com
+        active: true
+        locked: false
+        roles:
+            - Admin
+            - User

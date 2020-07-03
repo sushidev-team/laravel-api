@@ -1,0 +1,56 @@
+<?php
+
+namespace {{namespace}};
+
+use Illuminate\Http\Resources\Json\ResourceCollection;
+
+{{imports}}
+
+#region [CUSTOM:IMPORTS]
+{{customImports}}
+#endregion [CUSTOM:IMPORTS]
+
+class {{className}} extends ResourceCollection
+{
+    #region [CUSTOM:TRAITS]
+    {{customTraits}}
+    #endregion [CUSTOM:TRAITS]
+
+    /*
+    |
+    |--------------------------------------------------------------------------
+    | Generated Collection                                                   
+    | Please be aware when you run the command "php artisan api:update"      
+    | Cause it will automatically update this file                           
+    | <LOCKED>: {{locked}}                                                   
+    |--------------------------------------------------------------------------
+    |
+    */
+
+    {{documentation}}
+
+    public function toArray($request = null)
+    {
+        $collection =  $this->collection->transform(function($item){
+            $resourceItem =  new \{{resource}}($item);
+
+            #region [CUSTOM:RESOURCEHANDLER]
+            {{customResourceHandler}}
+            #endregion [CUSTOM:RESOURCEHANDLER]
+
+            return $resourceItem;
+        });
+
+        #region [CUSTOM:COLLECTIONHANDLER]
+        {{customCollectionHandler}}
+        #endregion [CUSTOM:COLLECTIONHANDLER]
+
+        return $collection;
+    }
+
+    #region [CUSTOM:METHODS]
+    {{customMethods}}
+    #endregion [CUSTOM:METHODS]
+
+}
+

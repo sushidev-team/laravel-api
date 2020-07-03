@@ -1,0 +1,7 @@
+@OA\Schema(
+*                           @OA\Property(
+*                               property="data",
+*                               type="{{responseType}}",
+*                               {{reference}}
+*                           ),
+*                       ),

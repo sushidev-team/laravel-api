@@ -1,0 +1,29 @@
+{{documentation}}
+public function update(Request $request, $id){
+
+    $api = $this->api->register({{methodRegister}}){{checkPermission}}{{checkValidations}}
+    ->hooksPre(function(Request $request, $requestData, $user){
+
+        #region [CUSTOM:PREHOOK-UPDATE]
+        {{customPreHook}}
+        #endregion [CUSTOM:PREHOOK-UPDATE]
+
+        return $requestData;
+    })
+    ->load($id){{checkPolicy}}
+    ->update()
+    ->hooksPost(function(Request $request, $requestData, $model, $modelData, $user){
+       
+        #region [CUSTOM:POSTHOOK-UPDATE]
+        {{customPostHook}}
+        #endregion [CUSTOM:POSTHOOK-UPDATE]
+
+    })->handler('update');
+
+    #region [CUSTOM:ENDPOINT-UPDATE]
+    {{customEndpointLogic}}
+    #endregion [CUSTOM:ENDPOINT-UPDATE]
+
+    return $api->respond('resource');
+
+}

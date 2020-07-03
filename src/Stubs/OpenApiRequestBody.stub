@@ -1,0 +1,5 @@
+/**
+* @OA\Schema(schema="{{className}}RequestBody{{method}}", required={{{required}}}, title="Model: {{className}} [Request-Body: {{className}}RequestBody{{method}}]",
+{{properties}}
+* )
+**/

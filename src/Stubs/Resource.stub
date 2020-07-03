@@ -1,0 +1,48 @@
+<?php
+
+namespace {{namespace}};
+
+use Illuminate\Http\Resources\Json\JsonResource;
+
+{{imports}}
+
+#region [CUSTOM:IMPORTS]
+{{customImports}}
+#endregion [CUSTOM:IMPORTS]
+
+class {{className}} extends JsonResource
+{
+    #region [CUSTOM:TRAITS]
+    {{customTraits}}
+    #endregion [CUSTOM:TRAITS]
+
+    /*
+    |
+    |--------------------------------------------------------------------------
+    | Generated Resource                                                     
+    | Please be aware when you run the command "php artisan api:update"      
+    | Cause it will automatically update this file                           
+    | <LOCKED>: {{locked}}                                                   
+    |--------------------------------------------------------------------------
+    |
+    */
+
+    {{documentation}}
+
+    public function toArray($request)
+    {
+        $result = parent::toArray($request);
+
+        #region [CUSTOM:RESOURCEHANDLER]
+        {{customResourceHandler}}
+        #endregion [CUSTOM:RESOURCEHANDLER]
+        
+        return $result;
+    }
+
+    #region [CUSTOM:METHODS]
+    {{customMethods}}
+    #endregion [CUSTOM:METHODS]
+
+}
+

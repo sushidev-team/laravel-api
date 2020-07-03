@@ -1,0 +1,6 @@
+*      @OA\Property(
+*          property="{{name}}",
+*          type="{{type}}",
+*          example={{example}},
+*          description="{{description}}",
+*      )

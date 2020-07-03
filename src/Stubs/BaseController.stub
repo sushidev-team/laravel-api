@@ -1,0 +1,38 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Routing\Controller as BaseController;
+
+class Controller extends BaseController
+{
+    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    /*
+    |
+    |--------------------------------------------------------------------------
+    | This file is automatic generated. Changes will disappear as soon        |
+    | a user runs the following command: php artisan api:update               |
+    |--------------------------------------------------------------------------
+    |
+    */
+
+    /**
+     * @OA\Info(
+     *      version="{{version}}",
+     *      title="{{title}}",
+     *      description="{{description}}",
+     *      @OA\Contact(
+     *          email="{{contact}}"
+     *      ),
+     *      @OA\License(
+     *         name="{{licence}}",
+     *         url="{{licenceUrl}}"
+     *      ),
+     * )
+     */
+     
+}

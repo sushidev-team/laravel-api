@@ -1,0 +1,25 @@
+
+{{documentation}}
+public function all(Request $request){
+
+    $api = $this->api->register({{methodRegister}}){{checkPermission}}{{checkValidations}}
+    ->hooksPre(function(Request $request, $requestData, $user){
+        #region [CUSTOM:PREHOOK-ALL]
+        {{customPreHook}}
+        #endregion [CUSTOM:PREHOOK-ALL]
+        return $requestData;
+    })
+    ->load(){{checkPolicy}}
+    ->hooksPost(function(Request $request, $requestData, $model, $modelData, $user){
+        #region [CUSTOM:POSTHOOK-ALL]
+        {{customPostHook}}
+        #endregion [CUSTOM:POSTHOOK-ALL]
+    })->handler('all');
+
+    #region [CUSTOM:ENDPOINT-ALL]
+    {{customEndpointLogic}}
+    #endregion [CUSTOM:ENDPOINT-ALL]
+
+    return $api->respond('collection');
+
+}

@@ -1,0 +1,28 @@
+{{documentation}}
+public function store(Request $request){
+
+    $api = $this->api->register({{methodRegister}}){{checkPermission}}{{checkValidations}}
+    ->hooksPre(function(Request $request, $requestData, $user){
+
+        #region [CUSTOM:PREHOOK-STORE]
+        {{customPreHook}}
+        #endregion [CUSTOM:PREHOOK-STORE]
+
+        return $requestData;
+    }){{checkPolicy}}
+    ->store()
+    ->hooksPost(function(Request $request, $requestData, $model, $modelData, $user){
+       
+        #region [CUSTOM:POSTHOOK-STORE]
+        {{customPostHook}}
+        #endregion [CUSTOM:POSTHOOK-STORE]
+
+    })->handler('store');
+
+    #region [CUSTOM:ENDPOINT-STORE]
+    {{customEndpointLogic}}
+    #endregion [CUSTOM:ENDPOINT-STORE]
+
+    return $api->respond('resource');
+
+}

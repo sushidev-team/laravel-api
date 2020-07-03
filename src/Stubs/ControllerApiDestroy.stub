@@ -1,0 +1,25 @@
+{{documentation}}
+public function destroy(Request $request, $id){
+
+    $api = $this->api->register({{methodRegister}}){{checkPermission}}{{checkValidations}}
+    ->hooksPre(function(Request $request, $requestData, $user){
+        #region [CUSTOM:PREHOOK-DELETE]
+        {{customPreHook}}
+        #endregion [CUSTOM:PREHOOK-DELETE]
+        return $requestData;
+    })
+    ->load($id){{checkPolicy}}
+    ->destroy()
+    ->hooksPost(function(Request $request, $requestData, $model, $modelData, $user){
+        #region [CUSTOM:POSTHOOK-DELETE]
+        {{customPostHook}}
+        #endregion [CUSTOM:POSTHOOK-DELETE]
+    })->handler('destroy');
+
+    #region [CUSTOM:ENDPOINT-DELETE]
+    {{customEndpointLogic}}
+    #endregion [CUSTOM:ENDPOINT-DELETE]
+
+    return $api->respond('messageDeleted');
+
+}

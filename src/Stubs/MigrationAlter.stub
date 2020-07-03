@@ -1,0 +1,36 @@
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class Alter{{className}}{{postfix}}Table extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+         if (Schema::hasTable('{{table}}') === true) {
+            Schema::table('{{table}}', function ($table) {
+                
+            });
+         }
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        if (Schema::hasTable('{{table}}') === true) {
+            Schema::table('{{table}}', function ($table) {
+                
+            });
+         }
+    }
+}

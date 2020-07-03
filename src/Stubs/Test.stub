@@ -1,0 +1,30 @@
+<?php
+
+namespace {{namespace}};
+
+use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+
+{{imports}}
+
+class {{name}}Test extends \AMBERSIVE\Api\Tests\TestPackageCase
+{
+
+    /*
+    |
+    |--------------------------------------------------------------------------
+    | Generated Test                                                         
+    | Please be aware when you run the command "php artisan api:update"       
+    | Cause it will automatically update this file                            
+    | <LOCKED>: {{locked}}                                                    
+    |--------------------------------------------------------------------------
+    |
+    */
+
+    #region [CUSTOM:TEST]
+    {{tests}}
+    #endregion [CUSTOM:TEST]
+
+}

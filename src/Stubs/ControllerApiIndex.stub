@@ -1,0 +1,28 @@
+{{documentation}}
+public function index(Request $request){
+
+    $api = $this->api->register({{methodRegister}}){{checkPermission}}{{checkValidations}}
+    ->hooksPre(function(Request $request, $requestData, $user){
+
+        #region [CUSTOM:PREHOOK-INDEX]
+        {{customPreHook}}
+        #endregion [CUSTOM:PREHOOK-INDEX]
+
+        return $requestData;
+    })
+    ->load(){{checkPolicy}}
+    ->hooksPost(function(Request $request, $requestData, $model, $modelData, $user){
+       
+        #region [CUSTOM:POSTHOOK-INDEX]
+        {{customPostHook}}
+        #endregion [CUSTOM:POSTHOOK-INDEX]
+
+    })->handler('index');
+
+    #region [CUSTOM:ENDPOINT-INDEX]
+    {{customEndpointLogic}}
+    #region [CUSTOM:ENDPOINT-INDEX]
+
+    return $api->respond('paginated');
+
+}

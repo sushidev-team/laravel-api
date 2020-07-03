@@ -1,0 +1,65 @@
+<?php
+
+namespace {{namespace}};
+
+use Illuminate\Http\Request;
+
+use AMBERSIVE\Api\Classes\EndpointRequest;
+use AMBERSIVE\Api\Controller\BaseApiController;
+
+{{imports}}
+
+#region [CUSTOM:IMPORTS]
+{{customImports}}
+#endregion [CUSTOM:IMPORTS]
+
+class {{controllerName}}Controller extends BaseApiController
+{
+    /*
+    |
+    |--------------------------------------------------------------------------
+    | Generated Controller                                                    
+    | Please be aware when you run the command "php artisan api:update"       
+    | Cause it will automatically update this file                            
+    | <LOCKED>: {{locked}}                                                    
+    |--------------------------------------------------------------------------
+    |
+    */
+
+    public EndpointRequest $api;
+
+    public function __construct(Request $request){
+
+        parent::__construct($request);
+
+        $this->api = new EndpointRequest($this, \{{model}}::class, \{{resource}}::class, \{{collection}}::class, \{{policy}}::class);
+
+        #region [CUSTOM:CONSTRUCTOR]
+        {{customConstructor}}
+        #endregion [CUSTOM:CONSTRUCTOR]
+
+    }
+
+    {{controllerApiAll}}
+
+    {{controllerApiIndex}}
+
+    {{controllerApiShow}}
+
+    {{controllerApiUpdate}}
+
+    {{controllerApiStore}}
+
+    {{controllerApiDelete}}
+
+    /*
+    |--------------------------------------------------------------------------
+    | Pleace insert your custom methods within the custom methods block.      |
+    |--------------------------------------------------------------------------
+    */
+
+    #region [CUSTOM:METHODS]
+    {{customMethods}}
+    #endregion [CUSTOM:METHODS]
+
+}

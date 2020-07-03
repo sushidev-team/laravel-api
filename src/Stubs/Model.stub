@@ -1,0 +1,100 @@
+<?php 
+
+namespace {{namespace}};
+
+use AMBERSIVE\Api\Models\BaseModel;
+
+{{imports}}
+
+#region [CUSTOM:IMPORTS]
+{{customImports}}
+#endregion [CUSTOM:IMPORTS]
+
+use AMBERSIVE\Api\Traits\Uuids;
+use AMBERSIVE\Api\Traits\Encryptable;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+class {{modelName}} {{extends}} {{implements}}
+{
+
+    use Uuids;
+    use Encryptable;
+
+    {{traits}}
+
+    #region [CUSTOM:TRAITS]
+    {{customTraits}}
+    #endregion [CUSTOM:TRAITS]
+
+    /*
+    |
+    |--------------------------------------------------------------------------
+    | Generated Model                                                         
+    | Please be aware when you run the command "php artisan api:update"       
+    | Cause it will automatically update this file                            
+    | <LOCKED>: {{locked}}                                                    
+    |--------------------------------------------------------------------------
+    |
+    */
+
+    {{documentation}}
+
+    protected $table = '{{table}}';
+
+    /**
+    * The attributes that are mass assignable.
+    * @var array
+    */
+    protected $fillable = [
+        {{fillable}}
+    ];
+
+    /**
+    * The attributes excluded from the model's JSON form.
+    * @var array
+    */
+    protected $hidden = [
+        {{hidden}}
+    ];
+
+    /**
+    * This attributes get added to the list / model
+    * @var array
+    */
+    protected $appends = [
+        {{appends}}
+    ];
+
+    /**
+    * The attributes casted and transformed to real values
+    * @var array
+    */
+    protected $casts = [
+        {{casts}}
+    ];
+
+     /**
+    * The attributes that should be encrypted.
+    * @var array
+    */
+    protected $encryptable = [
+        {{encryptable}}
+    ];
+
+    /**
+    * The attributes that should be mutated to dates.
+    * @var array
+    */
+    protected $dates = [{{dates}}];
+
+    {{relations}}
+
+    {{methods}}
+
+    #region [CUSTOM:METHODS]
+    {{customMethods}}
+    #endregion [CUSTOM:METHODS]
+
+}

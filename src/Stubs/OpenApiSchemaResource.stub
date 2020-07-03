@@ -1,0 +1,7 @@
+#region [Documentation]: {{className}}
+/**
+* @OA\Schema(schema="{{className}}", title="Resource: {{className}}",
+    {{properties}}
+* )
+**/
+#endregion [Documentation]: {{className}}

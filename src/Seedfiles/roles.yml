@@ -1,0 +1,7 @@
+model: \AMBERSIVE\Api\Models\Role
+entries:
+    7ac9d23b-5bcb-47e0-9263-9c2807f5fb03:
+        name: User
+        guard_name: api
+        permissions:
+            - 'users-current'

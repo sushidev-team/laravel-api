@@ -1,0 +1,34 @@
+<?php
+
+use Carbon\Carbon;
+use Faker\Generator as Faker;
+use Illuminate\Support\Str;
+
+#region [CUSTOM:IMPORTS]
+{{customImports}}
+#endregion [CUSTOM:IMPORTS]
+
+/*
+ |
+ |--------------------------------------------------------------------------
+ | Generated Factory                                                     
+ | Please be aware when you run the command "php artisan api:update"      
+ | Cause it will automatically update this file                           
+ | <LOCKED>: {{locked}}                                                   
+ |--------------------------------------------------------------------------
+ |
+ */
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define({{className}}::class, function (Faker $faker) {
+
+    $modelData = [];
+
+    #region [CUSTOM:LOGIC]
+    {{customLogic}}
+    #endregion [CUSTOM:LOGIC]
+
+    return $modelData;
+    
+    
+});

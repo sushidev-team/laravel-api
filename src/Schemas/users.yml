@@ -1,0 +1,283 @@
+table: users
+model: AMBERSIVE\Api\Models\User
+resource: AMBERSIVE\Api\Resources\UserResource
+collection: AMBERSIVE\Api\Resources\UserCollection
+policy: AMBERSIVE\Api\Policies\Users\UserPolicy
+locked: true
+lockedHard: true
+fields:
+    id:
+        type: uuid
+        description: ''
+        example: 7633ac89-a435-4b46-9dd9-4373314f2282
+        required_create: false
+        required_update: false
+        encrypt: false
+        hidden: false
+    username:
+        type: string
+        description: 'Username from the user'
+        example: 'John.Doe'
+        required_create: false
+        required_update: false
+        encrypt: false
+        hidden: false
+    firstname:
+        type: string
+        description: 'Firstname'
+        example: 'John'
+        required_create: false
+        required_update: false
+        encrypt: false
+        hidden: false
+    lastname:
+        type: string
+        description: 'Lastname'
+        example: 'Doe'
+        required_create: false
+        required_update: false
+        encrypt: false
+        hidden: false
+    email:
+        type: string
+        description: 'E-Mail address of the user.'
+        example: 'max@mustermann.com'
+        required_create: false
+        required_update: false
+        encrypt: false
+        hidden: false
+    email_verified_at:
+        type: date
+        description: 'Date of account verification'
+        example: '2019-08-01 00:00:00'
+        required_create: false
+        required_update: false
+        encrypt: false
+        hidden: false
+    password:
+        type: string
+        description: 'Hashed password.'
+        example: ''
+        required_create: false
+        required_update: false
+        encrypt: false
+        hidden: true
+    loginAttempts:
+        type: integer
+        description: 'How many login attemps has the user.'
+        example: 1
+        required_create: false
+        required_update: false
+        encrypt: false
+        hidden: true
+    loginAttemptTimestamp:
+        type: date
+        description: 'Time of the latest login attemp.'
+        example: '2019-08-01 00:00:00'
+        required_create: false
+        required_update: false
+        encrypt: false
+        hidden: false
+    active:
+        type: boolean
+        description: 'Is the user account active.'
+        example: true
+        required_create: false
+        required_update: false
+        encrypt: false
+        hidden: false
+    language:
+        type: string
+        description: 'The default language of the user.'
+        example: 'en'
+        required_create: false
+        required_update: false
+        encrypt: false
+        hidden: true
+    locked:
+        type: boolean
+        description: 'Is the user locked.'
+        example: false
+        required_create: false
+        required_update: false
+        encrypt: false
+        hidden: false
+    created_at:
+        type: date
+        description: ''
+        example: '2019-08-01 00:00:00'
+        required_create: false
+        required_update: false
+        encrypt: false
+        hidden: false
+    updated_at:
+        type: date
+        description: ''
+        example: '2019-08-01 00:00:00'
+        required_create: false
+        required_update: false
+        encrypt: false
+        hidden: false
+    deleted_at:
+        type: date
+        description: ''
+        example: '2019-08-01 00:00:00'
+        required_create: false
+        required_update: false
+        encrypt: false
+        hidden: false
+imports:
+    - Auth
+    - DB
+    - Tymon\JWTAuth\Contracts\JWTSubject
+    - Spatie\Permission\Models\Role
+    - Spatie\Permission\Models\Permission
+    - Illuminate\Foundation\Auth\User as Authenticatable
+implement: 
+    - JWTSubject
+extends: Authenticatable
+traits:
+    -  SoftDeletes
+appends: {  }
+casts: {  }
+relations: null
+roles:
+    User:
+        description: 'This role will have access to all endpoints of the table:users'
+        permissions:
+            - '*'
+permissions:
+    - users-all
+    - users-index
+    - users-show
+    - users-update
+    - users-store
+    - users-destroy
+    - users-current
+    - users-roles
+    - users-permissions
+endpoints:
+    all:
+        name: all
+        include: true
+        model: null
+        resource: null
+        fields:
+            - '*'
+        permissions:
+            - users-all
+        policy: all
+        where: {  }
+        with: 
+            - roles
+        order: {  }
+        hookPre: {  }
+        hookPost: {  }
+        validations: {  }
+        middleware:
+            - 'auth:api'
+        summary: ''
+        description: ''
+    index:
+        name: index
+        include: true
+        model: null
+        resource: null
+        fields:
+            - '*'
+        permissions:
+            - users-index
+        policy: all
+        where: {  }
+        with: 
+            - roles
+        order: {  }
+        hookPre: {  }
+        hookPost: {  }
+        validations: {  }
+        middleware:
+            - 'auth:api'
+        summary: ''
+        description: ''
+    show:
+        name: show
+        include: true
+        model: null
+        resource: null
+        fields:
+            - '*'
+        permissions:
+            - users-show
+        policy: view
+        where: {  }
+        with: 
+            - roles
+        order: {  }
+        hookPre: {  }
+        hookPost: {  }
+        validations: {  }
+        middleware:
+            - 'auth:api'
+        summary: ''
+        description: ''
+    update:
+        name: update
+        include: true
+        model: null
+        resource: null
+        fields:
+            - '*'
+        permissions:
+            - users-update
+        policy: update
+        where: {  }
+        with: {  }
+        order: {  }
+        hookPre: {  }
+        hookPost: {  }
+        validations: {  }
+        middleware:
+            - 'auth:api'
+        summary: ''
+        description: ''
+    store:
+        name: store
+        include: true
+        model: null
+        resource: null
+        fields:
+            - '*'
+        permissions:
+            - users-store
+        policy: store
+        where: {  }
+        with: {  }
+        order: {  }
+        hookPre: {  }
+        hookPost: {  }
+        validations: {  }
+        middleware:
+            - 'auth:api'
+        summary: ''
+        description: ''
+    destroy:
+        name: destroy
+        include: true
+        model: null
+        resource: null
+        fields:
+            - '*'
+        permissions:
+            - users-destroy
+        policy: destroy
+        where: {  }
+        with: {  }
+        order: {  }
+        hookPre: {  }
+        hookPost: {  }
+        validations: {  }
+        middleware:
+            - 'auth:api'
+        summary: ''
+        description: ''
+endpoints_exclude: {  }

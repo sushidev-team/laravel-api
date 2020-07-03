@@ -1,0 +1,28 @@
+{{documentation}}
+public function show(Request $request, $id){
+
+    $api = $this->api->register({{methodRegister}}){{checkPermission}}{{checkValidations}}
+    ->hooksPre(function(Request $request, $requestData, $user){
+
+        #region [CUSTOM:PREHOOK-SHOW]
+        {{customPreHook}}
+        #endregion [CUSTOM:PREHOOK-SHOW]
+
+        return $requestData;
+    })
+    ->load($id){{checkPolicy}}
+    ->hooksPost(function(Request $request, $requestData, $model, $modelData, $user){
+       
+        #region [CUSTOM:POSTHOOK-SHOW]
+        {{customPostHook}}
+        #endregion [CUSTOM:POSTHOOK-SHOW]
+
+    })->handler('show');
+
+    #region [CUSTOM:ENDPOINT-SHOW]
+    {{customEndpointLogic}}
+    #endregion [CUSTOM:ENDPOINT-SHOW]
+
+    return $api->respond('resource');
+
+}

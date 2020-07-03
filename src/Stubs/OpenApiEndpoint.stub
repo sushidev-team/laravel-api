@@ -1,0 +1,19 @@
+/**
+ * @OA\{{method}}(
+ *      path="/{{route}}",
+ *      operationId="{{name}}{{function}}",
+ *      tags={{{tags}}},
+ *      summary="{{summary}}",
+ *      description="{{description}}",{{authentication}}{{requestBodyParams}}{{requestBody}}
+ *      @OA\Response(
+ *           response=200,
+ *           description="{{descriptionSuccess}}",
+ *           @OA\JsonContent(
+ *               allOf={
+ *                   @OA\Schema(ref="#/components/schemas/{{responseMode}}"),
+ *                   {{reference}}
+ *               }
+ *           )
+ *      )
+ *   )
+ **/

@@ -1,0 +1,11 @@
+#region [Documentation]: {{className}}Model
+/**
+* @OA\Schema(schema="{{className}}Model", required={{{required}}}, title="Model: {{className}}",
+    {{properties}}
+* )
+**/
+#endregion [Documentation]: {{className}}Model
+
+#region [Documentation]: Requestbodies
+{{requestBodies}}
+#endregion [Documentation]: Requestbodies

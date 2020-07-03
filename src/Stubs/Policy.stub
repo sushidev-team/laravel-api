@@ -1,0 +1,86 @@
+<?php
+
+namespace {{namespace}};
+
+{{imports}}
+
+#region [CUSTOM:IMPORTS]
+{{customImports}}
+#endregion [CUSTOM:IMPORTS]
+
+use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Database\Eloquent\Collection;
+
+use {{userClass}} as User;
+
+class {{name}}Policy
+{
+    use HandlesAuthorization;
+
+    /**
+     * Create a new policy instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        //
+    }
+
+    /**
+     * Check if the user has special permissions
+     *
+     * @return boolean
+     */
+    public function before($user, $ability)
+    {
+        #region [CUSTOM:POLICY-BEFORE]
+        {{customPolicyBefore}}
+        #endregion [CUSTOM:POLICY-BEFORE]
+    }
+
+    public function all(User $user, {{model}} $first, Collection $collection = null): bool {
+        $allow = true;
+        #region [CUSTOM:POLICY-ALL]
+        {{customPolicyAll}}
+        #endregion [CUSTOM:POLICY-ALL]
+        return $allow;
+    }
+
+    public function view(User $user, {{model}} $model): bool {
+        $allow = true;
+        #region [CUSTOM:POLICY-SHOW]
+        {{customPolicyShow}}
+        #endregion [CUSTOM:POLICY-SHOW]
+        return $allow;
+    }
+
+    public function store(User $user): bool {
+        $allow = true;
+        #region [CUSTOM:POLICY-STORE]
+        {{customPolicyStore}}
+        #endregion [CUSTOM:POLICY-STORE]
+        return $allow;
+    }
+
+    public function update(User $user, {{model}} $model): bool {
+        $allow = true;
+        #region [CUSTOM:POLICY-UPDATE]
+        {{customPolicyUpdate}}
+        #endregion [CUSTOM:POLICY-UPDATE]
+        return $allow;
+    }
+
+    public function destroy(User $user, {{model}} $model): bool {
+        $allow = true;
+        #region [CUSTOM:POLICY-DESTROY]
+        {{customPolicyDestroy}}
+        #endregion [CUSTOM:POLICY-DESTROY]
+        return $allow;
+    }
+
+    #region [CUSTOM:METHODS]
+    {{customMethods}}
+    #endregion [CUSTOM:METHODS]
+
+}

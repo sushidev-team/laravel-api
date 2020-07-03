@@ -1,0 +1,191 @@
+table: roles
+model: App\Models\Security\Role
+resource: App\Http\Resources\Security\RoleResource
+collection: App\Http\Resources\Security\RoleCollection
+policy: App\Policies\Security\Role
+locked: false
+fields:
+    id:
+        type: uuid
+        description: ''
+        example: e17b08ec-71cf-4bb1-a344-8874843f99a4
+        required_create: false
+        required_update: false
+        encrypt: false
+        hidden: false
+    name:
+        type: string
+        description: 'This is the actual role name.'
+        example: 'User'
+        required_create: false
+        required_update: false
+        encrypt: false
+        hidden: false
+    guard_name:
+        type: string
+        description: 'Which area should be secured.'
+        example: 'api'
+        required_create: false
+        required_update: false
+        encrypt: false
+        hidden: false
+    created_at:
+        type: date
+        description: 'Creation date of the role.'
+        example: '2019-08-01 00:00:00'
+        required_create: false
+        required_update: false
+        encrypt: false
+        hidden: false
+    updated_at:
+        type: date
+        description: 'Date of last updated.'
+        example: '2019-08-01 00:00:00'
+        required_create: false
+        required_update: false
+        encrypt: false
+        hidden: false
+imports:
+    - Auth
+    - DB
+traits: {  }
+implement: {  }
+extends: BaseModel
+appends: {  }
+casts: {  }
+relations: null
+methods: {  }
+roles:
+    Role:
+        description: 'This role will have access to all endpoints of the table:roles'
+        permissions:
+            - '*'
+permissions:
+    - roles-all
+    - roles-index
+    - roles-show
+    - roles-update
+    - roles-store
+    - roles-destroy
+endpoints:
+    all:
+        name: all
+        include: true
+        model: null
+        resource: null
+        fields:
+            - '*'
+        permissions:
+            - roles-all
+        policy: all
+        where: {  }
+        with: {  }
+        order: {  }
+        hookPre: {  }
+        hookPost: {  }
+        validations: {  }
+        middleware:
+            - 'auth:api'
+        summary: ''
+        description: ''
+    index:
+        name: index
+        include: true
+        model: null
+        resource: null
+        fields:
+            - '*'
+        permissions:
+            - roles-index
+        policy: all
+        where: {  }
+        with: {  }
+        order: {  }
+        hookPre: {  }
+        hookPost: {  }
+        validations: {  }
+        middleware:
+            - 'auth:api'
+        summary: ''
+        description: ''
+    show:
+        name: show
+        include: true
+        model: null
+        resource: null
+        fields:
+            - '*'
+        permissions:
+            - roles-show
+        policy: view
+        where: {  }
+        with: {  }
+        order: {  }
+        hookPre: {  }
+        hookPost: {  }
+        validations: {  }
+        middleware:
+            - 'auth:api'
+        summary: ''
+        description: ''
+    update:
+        name: update
+        include: true
+        model: null
+        resource: null
+        fields:
+            - '*'
+        permissions:
+            - roles-update
+        policy: update
+        where: {  }
+        with: {  }
+        order: {  }
+        hookPre: {  }
+        hookPost: {  }
+        validations: {  }
+        middleware:
+            - 'auth:api'
+        summary: ''
+        description: ''
+    store:
+        name: store
+        include: true
+        model: null
+        resource: null
+        fields:
+            - '*'
+        permissions:
+            - roles-store
+        policy: store
+        where: {  }
+        with: {  }
+        order: {  }
+        hookPre: {  }
+        hookPost: {  }
+        validations: {  }
+        middleware:
+            - 'auth:api'
+        summary: ''
+        description: ''
+    destroy:
+        name: destroy
+        include: true
+        model: null
+        resource: null
+        fields:
+            - '*'
+        permissions:
+            - roles-destroy
+        policy: destroy
+        where: {  }
+        with: {  }
+        order: {  }
+        hookPre: {  }
+        hookPost: {  }
+        validations: {  }
+        middleware:
+            - 'auth:api'
+        summary: ''
+        description: ''
+endpoints_exclude: {  }

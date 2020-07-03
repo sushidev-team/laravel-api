@@ -1,0 +1,10 @@
+*      @OA\Parameter(
+*         name="{{param}}",
+*         in="{{where}}",
+*         description="{{description}}",
+*         required={{required}},
+*         @OA\Schema(
+*             type="{{type}}",
+*             example={{example}}
+*         )
+*      ),
