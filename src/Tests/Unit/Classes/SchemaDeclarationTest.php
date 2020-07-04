@@ -16,8 +16,8 @@ class SchemaDeclarationTest extends \AMBERSIVE\Api\Tests\TestPackageCase
         parent::setUp();
 
         Config::set('ambersive-api.collection_laravel', '');
-        Config::set('ambersive-api.resource_laravel', '');
-        Config::set('ambersive-api.model_laravel', '');
+        Config::set('ambersive-api.resource_laravel',   '');
+        Config::set('ambersive-api.model_laravel',      '');
 
     }
     

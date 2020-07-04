@@ -8,7 +8,6 @@
 
 ## Tutorials
 
-- [How to install this package?](install.md)
 - [Define your Policy](tutorial_policy.md)
 - [Use the default e-mail layout](emails.md)
 - [How to modify the user](users.md)
