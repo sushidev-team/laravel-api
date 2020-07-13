@@ -23,6 +23,7 @@
         <server name="DB_DATABASE_RL" value="database.sqlite"/>
         <server name="DB_DATABASE" value=":memory:"/>
         <server name="MAIL_DRIVER" value="log"/>
+        <server name="MAIL_ENCRYPTION" value="tls"/>
         <server name="QUEUE_CONNECTION" value="sync"/>
         <server name="SESSION_DRIVER" value="array"/>
     </php>

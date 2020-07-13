@@ -22,9 +22,6 @@ use \AMBERSIVE\Api\Models\PasswordReset;
 
 class ForgotPasswordControllerTest extends \AMBERSIVE\Tests\TestPackageCase
 {
-
-    use DatabaseMigrations;
-    use DatabaseTransactions;
     
     public $user;
     public String $userDefaultPw = 'testtest';

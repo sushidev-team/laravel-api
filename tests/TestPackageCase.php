@@ -2,6 +2,8 @@
 
 namespace AMBERSIVE\Tests;
 
+use Config;
+
 use AMBERSIVE\Tests\TestCase;
 
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
@@ -20,6 +22,25 @@ abstract class TestPackageCase extends TestCase
     {
         parent::setUp();
         shell_exec('php artisan api:update --silent');
+
+        Config::set('mail.default', 'log');
+
+        Config::set('permission.table_names', [
+            'roles'                 => 'roles',
+            'permissions'           => 'permissions',
+            'model_has_permissions' => 'model_has_permissions',
+            'model_has_roles'       => 'model_has_roles',
+            'role_has_permissions'  => 'role_has_permissions'
+        ]);
+
+        Config::set('permission.column_names', [
+            'model_morph_key' => 'model_uuid'
+        ]);
+
+        Config::set('auth.providers.users.model', \AMBERSIVE\Api\Models\User::class);
+        Config::set('ambersive-api.models.user_model', \AMBERSIVE\Api\Models\User::class);
+
+        $this->loadMigrationsFrom(__DIR__ . '/../src/Migrations');
     }
     
     /**
