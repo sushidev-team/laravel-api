@@ -38,8 +38,11 @@ abstract class TestPackageCase extends TestCase
         ]);
 
         Config::set('auth.providers.users.model', \AMBERSIVE\Api\Models\User::class);
-        Config::set('ambersive-api.models.user_model', \AMBERSIVE\Api\Models\User::class);
+        Config::set('auth:defaults.guard.user', 'api');
+        Config::set('auth.guards.api.driver', 'jwt');
 
+        Config::set('ambersive-api.models.user_model', \AMBERSIVE\Api\Models\User::class);
+        
         $this->loadMigrationsFrom(__DIR__ . '/../src/Migrations');
     }
     

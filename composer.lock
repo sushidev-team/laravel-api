@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a9dcf84a73cfacc5f3c69dd33a8edbd3",
+    "content-hash": "2cc42bbda66cd48b720f95c361fc9fcb",
     "packages": [
         {
             "name": "brick/math",
@@ -4836,12 +4836,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "0fd0b7843cea2f3c9454469efa7a47651fcc5191"
+                "reference": "5f71d090b2e2e3c35aa4bd15e0eeca40326e83be"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/0fd0b7843cea2f3c9454469efa7a47651fcc5191",
-                "reference": "0fd0b7843cea2f3c9454469efa7a47651fcc5191",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/5f71d090b2e2e3c35aa4bd15e0eeca40326e83be",
+                "reference": "5f71d090b2e2e3c35aa4bd15e0eeca40326e83be",
                 "shasum": ""
             },
             "require": {
@@ -4854,7 +4854,7 @@
                 "sebastian/code-unit-reverse-lookup": "^2.0.2",
                 "sebastian/environment": "^5.1.2",
                 "sebastian/version": "^3.0.1",
-                "theseer/tokenizer": "^1.1.3"
+                "theseer/tokenizer": "^1.2.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "^9.3"
@@ -4892,7 +4892,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2020-07-12T09:51:27+00:00"
+            "time": "2020-07-13T11:20:23+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",

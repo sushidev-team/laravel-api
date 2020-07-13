@@ -14,6 +14,9 @@ abstract class TestCase extends Orchestra
     {
         return [
             ApiServiceProvider::class,
+            \Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+            \Spatie\Permission\PermissionServiceProvider::class
         ];
     }
+    
 }

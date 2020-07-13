@@ -8,7 +8,7 @@
          convertNoticesToExceptions="true"
          convertWarningsToExceptions="true"
          processIsolation="false"
-         stopOnFailure="false">
+         stopOnFailure="true">
     <testsuites>
         <testsuite name="AMBERSIVE/API Test Suite">
             <directory>./tests/</directory>
@@ -26,5 +26,6 @@
         <server name="MAIL_ENCRYPTION" value="tls"/>
         <server name="QUEUE_CONNECTION" value="sync"/>
         <server name="SESSION_DRIVER" value="array"/>
+        <server name="JWT_SECRET" value="PPNBhcIhU0i7MWF2siMNl6nq5icNLV9ePeBfJfuqTkmOj867jY6yKqetV12J0kTt"/>
     </php>
 </phpunit>

@@ -20,6 +20,10 @@ use Carbon\Carbon;
 
 class LoginController extends BaseApiController
 {
+    public function __construct(Request $request){
+        parent::__construct($request);
+        $this->guard = "api";
+    }
 
     /**
     * @OA\Schema(schema="JWTToken", required={},
@@ -133,8 +137,9 @@ class LoginController extends BaseApiController
         $user->loginAttemptTimestamp = now();
         $user->loginAttempts++;
         $user->save();
+
         
-        $token = Auth::guard()->attempt($credentials);
+        $token = Auth::guard("api")->attempt($credentials);
 
         if ($token === false) {
 
@@ -165,7 +170,7 @@ class LoginController extends BaseApiController
         return $this->respondSuccess([
             'access_token' => $token,
             'token_type'   => 'bearer',
-            'expires_in'   => Auth::guard()->factory()->getTTL() * 60
+            'expires_in'   => Auth::guard('api')->factory()->getTTL() * 60
         ]);
     }
 

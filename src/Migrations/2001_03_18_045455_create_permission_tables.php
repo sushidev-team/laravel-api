@@ -26,6 +26,10 @@ class CreatePermissionTables extends Migration
             'model_morph_key' => 'model_uuid'
         ]);
 
+        if (App::environment() === 'testing'){
+            $columnNames['model_morph_key'] = 'model_uuid';
+        }
+
         Schema::dropIfExists($tableNames['role_has_permissions']);
         Schema::dropIfExists($tableNames['model_has_roles']);
         Schema::dropIfExists($tableNames['model_has_permissions']);

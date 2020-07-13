@@ -7,7 +7,7 @@ Route::post('/status',        '\AMBERSIVE\Api\Controller\System\StatusController
  * Authentication via Json Web Token
  */
 
-Route::prefix('auth')->name('auth.')->group(function () {
+Route::prefix('auth')->name('auth.')->middleware('api')->group(function () {
     Route::post('login',               '\AMBERSIVE\Api\Controller\Auth\LoginController@login')->name('login');
     Route::post('register',            '\AMBERSIVE\Api\Controller\Auth\RegisterController@register')->name('register');
     Route::get('refresh',              '\AMBERSIVE\Api\Controller\Auth\LoginController@refreshToken')->name('refresh.token')->middleware('auth:api');
