@@ -21,9 +21,9 @@ class CreatePermissionTables extends Migration
             'role_has_permissions'  => 'role_has_permissions'
         ]);
 
-        dd($tablesNames);
-
-        $columnNames = config('permission.column_names');
+        $columnNames = config('permission.column_names', [
+            'model_morph_key' => 'model_uuid'
+        ]);
 
         Schema::dropIfExists($tableNames['role_has_permissions']);
         Schema::dropIfExists($tableNames['model_has_roles']);

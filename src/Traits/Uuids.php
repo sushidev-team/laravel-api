@@ -13,21 +13,21 @@ trait Uuids
     protected static function bootUuids()
     {
         static::creating(function ($model) {
-            if (!$model->{config('uuid.default_uuid_column')}) {
-                $model->{config('uuid.default_uuid_column')} = Uuid::uuid4()->toString();
+            if (!$model->{config('uuid.default_uuid_column','id')}) {
+                $model->{config('uuid.default_uuid_column','id')} = Uuid::uuid4()->toString();
             }
         });
         static::saving(function ($model) {
 
-            $original_uuid = $model->getOriginal(config('uuid.default_uuid_column'));
+            $original_uuid = $model->getOriginal(config('uuid.default_uuid_column','id'));
         
             // To make sure you can set a uuid yourself
-            if ($original_uuid === null && $model->{config('uuid.default_uuid_column')} !== null && $model->{config('uuid.default_uuid_column')} !== "") {                
+            if ($original_uuid === null && $model->{config('uuid.default_uuid_column','id')} !== null && $model->{config('uuid.default_uuid_column')} !== "") {                
                 return;
             }
 
-            if ($original_uuid !== $model->{config('uuid.default_uuid_column')}) {
-                $model->{config('uuid.default_uuid_column')} = $original_uuid;
+            if ($original_uuid !== $model->{config('uuid.default_uuid_column','id')}) {
+                $model->{config('uuid.default_uuid_column','id')} = $original_uuid;
             }
 
         });
@@ -47,7 +47,7 @@ trait Uuids
             throw (new ModelNotFoundException)->setModel(get_class($this));
         }
     
-        $results = $query->where(config('uuid.default_uuid_column'), $uuid);
+        $results = $query->where(config('uuid.default_uuid_column','id'), $uuid);
     
         return $first ? $results->firstOrFail() : $results;
     }
