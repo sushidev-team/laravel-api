@@ -134,6 +134,7 @@ class RegisterController extends BaseApiController
 
         $userClass         = config('ambersive-api.models.user_model', \AMBERSIVE\Api\Models\User::class);
         $userResourceClass = config('ambersive-api.models.user_resource', \AMBERSIVE\Api\Models\User::class);
+        $userRoleClass     = config('permission.models.role', \AMBERSIVE\Api\Models\Role::class);
         $userRoles         = config('ambersive-api.users.roles', ['User']);
         $setActiveOnRegistration = config('ambersive-api.automatic_active', false);
 
@@ -156,7 +157,7 @@ class RegisterController extends BaseApiController
         }
 
         // Do the database stuff for the user creation
-        $response = DB::transaction(function() use ($request, $form, $userClass, $userResourceClass, $userRoles, $setActiveOnRegistration){
+        $response = DB::transaction(function() use ($request, $form, $userClass, $userResourceClass, $userRoleClass, $userRoles, $setActiveOnRegistration){
 
             $user = $userClass::create([
                 'username'  => data_get($form, 'username', null),
@@ -179,7 +180,8 @@ class RegisterController extends BaseApiController
                 event(new \AMBERSIVE\Api\Events\Registered($user, $userActivation->code));
             }
 
-            $user->syncRoles($userRoles);
+            $roles = $userRoleClass::whereIn('name',$userRoles)->get();
+            $user->syncRoles($roles);
 
             return $this->respondSuccess(new $userResourceClass($user->toArray()));
 

@@ -12,10 +12,7 @@ use \AMBERSIVE\Tests\TestPackageCase;
 use AMBERSIVE\Api\Classes\SchemaEndpoint; 
 use AMBERSIVE\Api\Classes\EndpointRequest; 
 
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+
 
 use Illuminate\Support\Facades\Mail;
 
@@ -24,8 +21,6 @@ use Faker\Generator as Faker;
 class RegisterControllerTest extends \AMBERSIVE\Tests\TestPackageCase
 {
 
-    use DatabaseMigrations;
-    use DatabaseTransactions;
     
     public $user;
     public array $form;
@@ -126,6 +121,7 @@ class RegisterControllerTest extends \AMBERSIVE\Tests\TestPackageCase
     public function testIfRegistrationWillCreateAccount(): void {
 
         $response = $this->postJson('/api/auth/register', $this->form);
+
         $response->assertStatus(200);
 
         $json = json_decode($response->getContent(), true);
@@ -134,6 +130,9 @@ class RegisterControllerTest extends \AMBERSIVE\Tests\TestPackageCase
 
         $this->assertEquals(data_get($this->form, 'username'), data_get($json, 'data.username'));
         $this->assertEquals(data_get($this->form, 'email'), data_get($json, 'data.email'));
+
+        $user = \AMBERSIVE\Api\Models\User::where('id', data_get($json, 'data.id'))->with('roles')->first();
+        $this->assertEquals(1, $user->roles->count());
 
     }
 

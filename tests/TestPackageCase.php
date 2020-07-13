@@ -10,6 +10,7 @@ use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
 abstract class TestPackageCase extends TestCase
 {
+
     public $permissions = [];
     public $role = null;
     public $roles = [];
@@ -21,7 +22,6 @@ abstract class TestPackageCase extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        shell_exec('php artisan api:update --silent');
 
         Config::set('mail.default', 'log');
 
@@ -42,8 +42,20 @@ abstract class TestPackageCase extends TestCase
         Config::set('auth.guards.api.driver', 'jwt');
 
         Config::set('ambersive-api.models.user_model', \AMBERSIVE\Api\Models\User::class);
+
+        Config::set('permission.models.permission', \AMBERSIVE\Api\Models\Permission::class);
+        Config::set('permission.models.role', \AMBERSIVE\Api\Models\Role::class);
         
         $this->loadMigrationsFrom(__DIR__ . '/../src/Migrations');
+
+        $this->artisan('migrate', [
+            '--path' => realpath(__DIR__ . '/../src/Migrations'),
+            '--realpath' => false,
+            '--database' => 'sqlite',
+        ]);
+
+        shell_exec('php artisan api:update --silent');
+
     }
     
     /**
@@ -124,6 +136,7 @@ abstract class TestPackageCase extends TestCase
                 'name'  => $prefix.$permission,
                 'guard_name' => 'api'
             ]);
+
             $permissionList[] = $permission;
         }
 
@@ -141,9 +154,9 @@ abstract class TestPackageCase extends TestCase
         if ($roleName !== null) {
             
             $role = factory($classRole)->create([
-                'name'  => $roleName
+                'name'  => $roleName,
+                'guard_name' => 'api'
             ]);
-            $role->syncPermissions($role);
             $this->role = $role;
 
         }
@@ -151,7 +164,7 @@ abstract class TestPackageCase extends TestCase
         // Assign the permissions to the given list of users
         if (!empty($users)) {
             foreach($users as $user){
-                $user->syncPermissions($this->permissions);
+                $user->syncPermissions($permissionList);
             }
         }
 

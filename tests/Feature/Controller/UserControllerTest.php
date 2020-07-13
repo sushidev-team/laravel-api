@@ -18,8 +18,6 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 class UserControllerTest extends \AMBERSIVE\Tests\TestPackageCase
 {
 
-    use DatabaseMigrations;
-    use DatabaseTransactions;
     
     public $user;
     public $user2;
@@ -57,7 +55,9 @@ class UserControllerTest extends \AMBERSIVE\Tests\TestPackageCase
      */
     public function testIfCurrentReturnsTheCurrentUser():void {
 
-        $response = $this->actingAs($this->user)->getJson('/api/users/current');
+
+
+        $response = $this->actingAs($this->user, 'api')->getJson('/api/users/current');
         $response->assertStatus(200);
 
         $response->assertJsonStructure([
@@ -96,13 +96,13 @@ class UserControllerTest extends \AMBERSIVE\Tests\TestPackageCase
     public function testIfAnotherUserCannotGetTheDataForAnotherUser():void {
 
         // First request $user1
-        $response = $this->actingAs($this->user)->getJson('/api/users/current');
+        $response = $this->actingAs($this->user,'api')->getJson('/api/users/current');
         $response->assertStatus(200);
         $content = json_decode($response->getContent(), true);
         $this->assertEquals(data_get($content, 'data.id'), $this->user->id);
 
         // Second request $user2
-        $response = $this->actingAs($this->user2)->getJson('/api/users/current');
+        $response = $this->actingAs($this->user2,'api')->getJson('/api/users/current');
         $response->assertStatus(200);
         $content = json_decode($response->getContent(), true);
         $this->assertEquals(data_get($content, 'data.id'), $this->user2->id);
@@ -124,9 +124,10 @@ class UserControllerTest extends \AMBERSIVE\Tests\TestPackageCase
             'locked'            => false
         ]);
 
-        $userWithNoPermissions->syncPermissions(['users-current']);
+        $permissions = \AMBERSIVE\Api\Models\Permission::whereIn('name', ['users-current'])->get();
+        $userWithNoPermissions->syncPermissions($permissions);
 
-        $response = $this->actingAs($userWithNoPermissions)->getJson('/api/users/current');
+        $response = $this->actingAs($userWithNoPermissions,'api')->getJson('/api/users/current');
         $response->assertStatus(200);
 
     }
@@ -148,7 +149,7 @@ class UserControllerTest extends \AMBERSIVE\Tests\TestPackageCase
 
         $userWithNoPermissions->syncPermissions([]);
 
-        $response = $this->actingAs($userWithNoPermissions)->getJson('/api/users/current');
+        $response = $this->actingAs($userWithNoPermissions,'api')->getJson('/api/users/current');
         $response->assertStatus(403);
 
     }

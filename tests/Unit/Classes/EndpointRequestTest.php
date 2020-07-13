@@ -20,8 +20,6 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 class EndpointRequestTest extends \AMBERSIVE\Tests\TestPackageCase
 {
 
-    use DatabaseMigrations;
-    use DatabaseTransactions;
 
     public EndpointRequest $endpoint;
 

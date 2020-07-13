@@ -154,7 +154,7 @@ class BaseApiController extends Controller
      * @return void
      */
     protected function getCurrentUser() {
-        return Auth::guard()->user();
+        return Auth::guard('api')->user();
     }
 
     /**

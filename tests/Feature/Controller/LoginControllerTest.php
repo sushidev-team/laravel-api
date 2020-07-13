@@ -10,16 +10,8 @@ use \AMBERSIVE\Tests\TestPackageCase;
 use AMBERSIVE\Api\Classes\SchemaEndpoint; 
 use AMBERSIVE\Api\Classes\EndpointRequest; 
 
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-
 class LoginControllerTest extends \AMBERSIVE\Tests\TestPackageCase
 {
-
-    use DatabaseMigrations;
-    use DatabaseTransactions;
     
     public $user;
     public string $userDefaultPw = 'testtest';
