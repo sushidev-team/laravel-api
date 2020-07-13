@@ -23,7 +23,7 @@ class StubsHelper
       $path = config('ambersive-api.stubs_store');
 
       if (File::exists($path) === false) {
-          $path = base_path('vendor/AMBERSIVE/api/src/Stubs');
+          $path = __DIR__ . "/../Stubs";
       }
 
       if ($name != null) {
