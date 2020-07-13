@@ -15,7 +15,17 @@ abstract class TestCase extends Orchestra
         return [
             ApiServiceProvider::class,
             \Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
-            \Spatie\Permission\PermissionServiceProvider::class
+            \Spatie\Permission\PermissionServiceProvider::class,
+            \PragmaRX\Yaml\Package\ServiceProvider::class,
+            \PragmaRX\Version\Package\ServiceProvider::class
+        ];
+    }
+
+    protected function getPackageAliases($app)
+    {
+        return [
+            'Yaml' => 'PragmaRX\Yaml\Package\Facade',
+            'Version' => 'PragmaRX\Version\Package\Facade'
         ];
     }
     

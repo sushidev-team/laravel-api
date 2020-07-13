@@ -32,7 +32,7 @@ class BaseWebControllerTest extends TestPackageCase
 
         $response = $controller->respondFileAsDownload($request, base_path('composer.json'));
     
-        $this->assertTrue($response->headers->get(0) == 'Content-Type: text/plain');
+        $this->assertTrue($response->headers->get(0) == 'Content-Type: application/json');
         $this->assertTrue($response->headers->get('content-disposition') == 'attachment; filename=composer.json');
 
     }
@@ -63,7 +63,7 @@ class BaseWebControllerTest extends TestPackageCase
 
         $response = $controller->respondFileAsDownload($request, base_path('composer.json'),'XXX.json');
     
-        $this->assertTrue($response->headers->get(0) == 'Content-Type: text/plain');
+        $this->assertTrue($response->headers->get(0) == 'Content-Type: application/json');
         $this->assertTrue($response->headers->get('content-disposition') == 'attachment; filename=XXX.json');        
 
     }

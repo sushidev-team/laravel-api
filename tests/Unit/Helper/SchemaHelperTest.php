@@ -2,10 +2,6 @@
 
 namespace AMBERSIVE\Tests\Unit\Helper;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-
 use \AMBERSIVE\Tests\TestPackageCase;
 
 use AMBERSIVE\Api\Helper\SchemaHelper; 
@@ -15,12 +11,10 @@ use Illuminate\Support\Facades\Schema;
 
 use File;
 use Str;
+use Yaml;
 
 class SchemaHelperTest extends \AMBERSIVE\Tests\TestPackageCase
 {
-
-   use DatabaseMigrations;
-   use DatabaseTransactions;
 
    public $testMigrationTable = "tests";
    

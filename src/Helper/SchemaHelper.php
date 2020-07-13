@@ -638,6 +638,12 @@ class SchemaHelper
             'licenceUrl'  => config('ambersive-api.swagger_licence_url')
         ]);
 
+        $path = app_path('Http/Controllers');
+
+        if(File::isDirectory($path) == false) {
+            File::makeDirectory($path, 0777, true);
+        }
+
         File::put(app_path('Http/Controllers/Controller.php'), $file);
 
     }
