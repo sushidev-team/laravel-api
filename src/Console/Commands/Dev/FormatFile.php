@@ -2,6 +2,8 @@
 
 namespace AMBERSIVE\Api\Console\Commands\Dev;
 
+use App;
+
 use Illuminate\Console\Command;
 
 use AMBERSIVE\Api\Helper\SchemaHelper; 
@@ -39,9 +41,12 @@ class FormatFile extends Command
      */
     public function handle()
     {
-       
         $output = null;
         $path   = data_get($this->options(),'path');
+
+        if (App::environment() === 'testing'){
+            return $this->info($path.' has been formatted via prettier.');
+        }    
 
         if ($path == null) {
             $this->error('Please define a file that should be formatted.');
