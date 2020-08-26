@@ -69,8 +69,6 @@ class SchemaHelper
            $path = $store($prefix).(Str::endsWith($store($prefix),"/") === true ? '' :'/').$path;
         }
 
-        dd($path);
-
         if ($fileExtension !== null){
            $path .= '.'.$fileExtension;
         }
