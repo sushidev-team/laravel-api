@@ -810,7 +810,11 @@ class SchemaHelper
             
             if ($item['type'] === 'boolean') {
                 $example = $item['example']  === true ? 'true' : 'false';
-            }        
+            }      
+            
+            if ($example == null || $example === '') {
+                $example = '""';
+            }
 
             $propertyData = [
                 'name'        => $name,
@@ -818,10 +822,6 @@ class SchemaHelper
                 'example'     => $example,
                 'description' => (isset($item['description']) ? $item['description'] : '')
             ];
-
-            if ($example === null || ($item['type'] !== 'string' && $example === '')) {
-                unset($propertyData['example']);
-            }
 
             $property = StubsHelper::replacePlaceholders('OpenApiProperty', $propertyData);
 
@@ -1024,16 +1024,16 @@ class SchemaHelper
                 $example = $field['type'] !== 'integer' && $field['type'] !== 'boolean' ? '"'.$field['example'].'"' : $field['example'] ;
             }
 
+            if ($example == null || $example === "") {
+                $example = '""';
+            }
+
             $propertyData = [
                 'name'        => $key,
                 'type'        => data_get($field, 'type', 'string'),
                 'example'     => $example,
                 'description' => data_get($field, 'description', '')
             ];
-
-            if ($example === null) {
-                unset($propertyData['example']);
-            }
 
             $property = StubsHelper::replacePlaceholders('OpenApiProperty', $propertyData).",";
 
