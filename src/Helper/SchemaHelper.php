@@ -66,8 +66,10 @@ class SchemaHelper
         $path = self::sanitizeClasspath($classPath);
 
         if ($prefix  !== null) {
-           $path = $store($prefix).'/'.$path;
+           $path = $store($prefix).(Str::endsWith($store($prefix),"/") === true ? '' :'/').$path;
         }
+
+        dd($path);
 
         if ($fileExtension !== null){
            $path .= '.'.$fileExtension;
@@ -946,6 +948,7 @@ class SchemaHelper
         $collectionName = array_pop($splitted);
 
         $path   = self::extractPathForFile($schema['resource'], config('ambersive-api.resource_laravel'), 'php');
+
         $folder = self::extractFolderForFile($schema['resource'], config('ambersive-api.resource_laravel'));
 
         // Check if the file is locked
@@ -956,8 +959,6 @@ class SchemaHelper
         if(!File::isDirectory($folder)){
             File::makeDirectory($folder, 0777, true, true);
         }
-
-
 
         // Define the imports
         $imports = self::imports($schema);
