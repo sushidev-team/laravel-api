@@ -945,8 +945,8 @@ class SchemaHelper
         $splitted  = explode('\\', $schema['resource'] != null ? $schema['resource'] : '');
         $collectionName = array_pop($splitted);
 
-        $path   = app_path(self::extractPathForFile($schema['resource'], config('ambersive-api.resource_laravel'), 'php'));
-        $folder = app_path(self::extractFolderForFile($schema['resource'], config('ambersive-api.resource_laravel')));
+        $path   = self::extractPathForFile($schema['resource'], config('ambersive-api.resource_laravel'), 'php');
+        $folder = self::extractFolderForFile($schema['resource'], config('ambersive-api.resource_laravel'));
 
         // Check if the file is locked
         if (self::handleLocked($path, $schema) === false) {
@@ -1060,8 +1060,8 @@ class SchemaHelper
         $splitted  = explode('\\', $schema['collection'] != null ? $schema['collection'] : '');
         $collectionName = array_pop($splitted);
 
-        $path   = app_path(self::extractPathForFile($schema['collection'], config('ambersive-api.collection_laravel'), 'php'));
-        $folder = app_path(self::extractFolderForFile($schema['collection'], config('ambersive-api.collection_laravel')));
+        $path   = self::extractPathForFile($schema['collection'], config('ambersive-api.collection_laravel'), 'php');
+        $folder = self::extractFolderForFile($schema['collection'], config('ambersive-api.collection_laravel'));
 
         // Check if the file is locked
         if (self::handleLocked($path, $schema) === false) {
@@ -1115,8 +1115,8 @@ class SchemaHelper
         $splitted  = explode('\\', $schema['model'] != null ? $schema['model'] : '');
         $controllerName = array_pop($splitted);
 
-        $path   = app_path(self::extractPathForFile($schema['model'].'Controller', 'Http/Controllers/'.config('ambersive-api.controller_laravel'), 'php'));
-        $folder = app_path(self::extractFolderForFile($schema['model'], 'Http/Controllers/'.config('ambersive-api.controller_laravel')));
+        $path   = self::extractPathForFile($schema['model'].'Controller', 'Http/Controllers/'.config('ambersive-api.controller_laravel'), 'php');
+        $folder = self::extractFolderForFile($schema['model'], 'Http/Controllers/'.config('ambersive-api.controller_laravel'));
 
         // Check if the file is locked
         if (self::handleLocked($path, $schema) === false) {

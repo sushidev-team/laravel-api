@@ -33,7 +33,7 @@ class TestResource extends JsonResource
     *      @OA\Property(
 *          property="id",
 *          type="string",
-*          example=,
+*          example={{example}},
 *          description="",
 *      ),
 * )
