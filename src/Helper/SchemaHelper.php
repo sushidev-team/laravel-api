@@ -184,7 +184,7 @@ class SchemaHelper
     /**
      * Read a schema file and return the content as array
      */
-    public static function readSchema(string $name = null, $customPath = null) {
+    public static function readSchema(string $name = null, string $customPath = null) {
 
         $name        = strtolower($name);
         $path        = self::path($name);
@@ -932,15 +932,15 @@ class SchemaHelper
      * @param  mixed $name
      * @return bool
      */
-    public static function createResource($name): bool {
-        $schema    = self::readSchema($name);
+    public static function createResource($name, string $customPath = null): bool {
+        $schema    = self::readSchema($name, $customPath);
         $success   = false;
 
         $splitted  = explode('\\', $schema['resource'] != null ? $schema['resource'] : '');
         $collectionName = array_pop($splitted);
 
-        $path   = self::extractPathForFile($schema['resource'], config('ambersive-api.resource_laravel'), 'php');
-        $folder = self::extractFolderForFile($schema['resource'], config('ambersive-api.resource_laravel'));
+        $path   = app_path(self::extractPathForFile($schema['resource'], config('ambersive-api.resource_laravel'), 'php'));
+        $folder = app_path(self::extractFolderForFile($schema['resource'], config('ambersive-api.resource_laravel')));
 
         // Check if the file is locked
         if (self::handleLocked($path, $schema) === false) {
@@ -1015,7 +1015,10 @@ class SchemaHelper
 
         foreach($schemaResource as $key => $field) {
 
-            $example = $field['type'] !== 'integer' && $field['type'] !== 'boolean' ? '"'.$field['example'].'"' : $field['example'] ;
+            $example = null;
+            if (isset($field['example'])){
+                $example = $field['type'] !== 'integer' && $field['type'] !== 'boolean' ? '"'.$field['example'].'"' : $field['example'] ;
+            }
 
             $property = StubsHelper::replacePlaceholders('OpenApiProperty', [
                 'name'        => $key,
@@ -1037,16 +1040,16 @@ class SchemaHelper
         
     }
 
-    public static function createCollection($name): bool {
+    public static function createCollection($name, string $customPath = null): bool {
 
-        $schema    = self::readSchema($name);
+        $schema    = self::readSchema($name, $customPath);
         $success   = false;
 
         $splitted  = explode('\\', $schema['collection'] != null ? $schema['collection'] : '');
         $collectionName = array_pop($splitted);
 
-        $path   = self::extractPathForFile($schema['collection'], config('ambersive-api.collection_laravel'), 'php');
-        $folder = self::extractFolderForFile($schema['collection'], config('ambersive-api.collection_laravel'));
+        $path   = app_path(self::extractPathForFile($schema['collection'], config('ambersive-api.collection_laravel'), 'php'));
+        $folder = app_path(self::extractFolderForFile($schema['collection'], config('ambersive-api.collection_laravel')));
 
         // Check if the file is locked
         if (self::handleLocked($path, $schema) === false) {
@@ -1092,16 +1095,16 @@ class SchemaHelper
      * @param  mixed $name
      * @return bool
      */
-    public static function createController($name): bool {
+    public static function createController($name, string $customPath = null): bool {
         
-        $schema    = self::readSchema($name);
+        $schema    = self::readSchema($name, $customPath);
         $success   = false;
 
         $splitted  = explode('\\', $schema['model'] != null ? $schema['model'] : '');
         $controllerName = array_pop($splitted);
 
-        $path   = self::extractPathForFile($schema['model'].'Controller', 'Http/Controllers/'.config('ambersive-api.controller_laravel'), 'php');
-        $folder = self::extractFolderForFile($schema['model'], 'Http/Controllers/'.config('ambersive-api.controller_laravel'));
+        $path   = app_path(self::extractPathForFile($schema['model'].'Controller', 'Http/Controllers/'.config('ambersive-api.controller_laravel'), 'php'));
+        $folder = app_path(self::extractFolderForFile($schema['model'], 'Http/Controllers/'.config('ambersive-api.controller_laravel')));
 
         // Check if the file is locked
         if (self::handleLocked($path, $schema) === false) {
@@ -1164,7 +1167,7 @@ class SchemaHelper
         }
 
         // Check if the include flag is set to true
-        $include = data_get($schema, 'endpoints.store.include', false);
+        $include = data_get($schema, "endpoints.${name}.include", false);
 
         if ($include === false) {
             return '';
@@ -1265,7 +1268,7 @@ class SchemaHelper
         $responseMode = data_get($schema, "endpoints.${name}.responseMode", null);
         $requestBody = data_get($schema, "endpoints.${name}.requestBody", null);;
 
-        $main = Str::singular(data_get($schema, "table", ""));
+        $main = Str::camel(Str::singular(data_get($schema, "table", "")));
 
         $tags = collect(data_get($schema, "endpoints.${name}.tags", [ucfirst(Str::plural($main))]))->map(function($tag) {
             return '"'.$tag.'"';
@@ -1410,11 +1413,11 @@ class SchemaHelper
 
     }
 
-    public static function createTests($name): bool {
+    public static function createTests($name, string $customPath = null): bool {
 
         $tests = [
-            self::createTest($name, 'Controller', 'Feature', 'Controllers'),
-            self::createTest($name, 'Model', 'Unit', 'Models')
+            self::createTest($name, 'Controller', 'Feature', 'Controllers',  $customPath),
+            self::createTest($name, 'Model', 'Unit', 'Models', $customPath)
         ];
 
         return in_array(false, $tests) === false;
@@ -1423,9 +1426,9 @@ class SchemaHelper
     /**
      * Create a single test file
      */
-    public static function createTest($name, string $nameSuffix = '', string $type = 'Feature', string $prefix = null): bool {
+    public static function createTest($name, string $nameSuffix = '', string $type = 'Feature', string $prefix = null, string $customPath = null): bool {
 
-        $schema    = self::readSchema($name);
+        $schema    = self::readSchema($name, $customPath);
         $success   = false;
 
         $splitted  = explode('\\', $schema['model'] != null ? $schema['model'] : '');
@@ -1466,9 +1469,9 @@ class SchemaHelper
 
     }
 
-    public static function createPolicy($name): bool {
+    public static function createPolicy($name, string $customPath = null): bool {
         
-        $schema    = self::readSchema($name);
+        $schema    = self::readSchema($name, $customPath);
         $success   = false;
 
         $splitted   = explode('\\', $schema['model'] != null ? $schema['model'] : '');
@@ -1596,6 +1599,10 @@ class SchemaHelper
             'customPolicies'       => $customPolices  != null ? $customPolices : "",
             'policies'             => $policiesConverted
         ]);
+
+        if(File::isDirectory(app_path("Providers")) == false) {
+            File::makeDirectory(app_path("Providers"), 0777, true);
+        }     
 
         File::put($path, $file);
 

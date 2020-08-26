@@ -1,0 +1,138 @@
+table: user_more
+model: App\Models\Test\Test
+resource: App\Http\Resources\TestResource
+collection: App\Http\Resources\TestCollection
+locked: false
+fields: {  }
+roles:
+    User:
+        description: 'This role will have access to all endpoints of the table:users'
+        permissions:
+            - '*'
+permissions:
+    - users-all
+    - users-index
+    - users-show
+    - users-update
+    - users-create
+    - users-destroy
+imports:
+    - Auth
+    - DB
+endpoints:
+    all:
+        name: all
+        include: true
+        model: null
+        resource: null
+        fields:
+            - '*'
+        permissions: {  }
+        policy: null
+        where: {  }
+        with: {  }
+        order: {  }
+        hookPre: {  }
+        hookPost: {  }
+        validations: {  }
+        middleware:
+            - 'auth:api'
+        summary: ''
+        description: ''
+    index:
+        name: index
+        include: true
+        model: null
+        resource: null
+        fields:
+            - '*'
+        permissions: {  }
+        policy: null
+        where: {  }
+        with: {  }
+        order: {  }
+        hookPre: {  }
+        hookPost: {  }
+        validations: {  }
+        middleware:
+            - 'auth:api'
+        summary: ''
+        description: ''
+    show:
+        name: show
+        include: true
+        model: null
+        resource: null
+        fields:
+            - '*'
+        permissions: {  }
+        policy: null
+        where: {  }
+        with: {  }
+        order: {  }
+        hookPre: {  }
+        hookPost: {  }
+        validations: {  }
+        middleware:
+            - 'auth:api'
+        summary: ''
+        description: ''
+    update:
+        name: update
+        include: true
+        model: null
+        resource: null
+        fields:
+            - '*'
+        permissions: {  }
+        policy: null
+        where: {  }
+        with: {  }
+        order: {  }
+        hookPre: {  }
+        hookPost: {  }
+        validations: {  }
+        middleware:
+            - 'auth:api'
+        summary: ''
+        description: ''
+    create:
+        name: create
+        include: true
+        model: null
+        resource: null
+        fields:
+            - '*'
+        permissions: {  }
+        policy: null
+        where: {  }
+        with: {  }
+        order: {  }
+        hookPre: {  }
+        hookPost: {  }
+        validations: {  }
+        middleware:
+            - 'auth:api'
+        summary: ''
+        description: ''
+    destroy:
+        name: destroy
+        include: true
+        model: null
+        resource: null
+        fields:
+            - '*'
+        permissions: {  }
+        policy: null
+        where: {  }
+        with: {  }
+        order: {  }
+        hookPre: {  }
+        hookPost: {  }
+        validations: {  }
+        middleware:
+            - 'auth:api'
+        summary: ''
+        description: ''
+endpoints_exclude: {  }
+relations: null

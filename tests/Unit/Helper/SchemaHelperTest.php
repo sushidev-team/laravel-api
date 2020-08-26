@@ -559,34 +559,118 @@ class SchemaHelperTest extends \AMBERSIVE\Tests\TestPackageCase
 
    }
 
+   /**
+    * Test if a resource will be created
+    */
    public function testIfCreateResourceWillCreateAResourceFile(): void {
 
-      
+      $success = SchemaHelper::createResource("test_underlined", __DIR__.'/../../Testfiles');    
+      $this->assertTrue($success);
+      $this->assertTrue(File::exists(app_path("Http/Resources/TestResource.php")));
 
    }
 
+   /**
+    * Test if the collection will be created
+    */
    public function testIfCreateCollectionWillCreateACollectionFile(): void {
       
+      $success = SchemaHelper::createCollection("test_underlined", __DIR__.'/../../Testfiles');    
+      $this->assertTrue($success);
+      $this->assertTrue(File::exists(app_path("Http/Resources/TestCollection.php")));
+
    }
 
+   /**
+    * Test if the controller will be created
+    */
    public function testIfCreateControllerWillCreateAControllerFile(): void {
       
+      SchemaHelper::createController("test_underlined", __DIR__.'/../../Testfiles');      
+      $this->assertTrue(File::exists(app_path("Http/Controllers/Test/TestController.php")));
+
    }
 
+   /**
+    * Test if the controller documentation can handle the underlines and will transform it to camel case
+    *
+    * @return void
+    */
+   public function testIfCreateControllerDocumentationCanHandleTablesWithUnderline():void {
+
+      $schema = SchemaHelper::readSchema("test_underlined", __DIR__.'/../../Testfiles');
+      $documentation = SchemaHelper::createControllerDocumentation($schema,'update');
+
+     $this->assertNotFalse(strpos($documentation, "ref=\"#/components/schemas/UserMoreRequestBodyUpdate\""));
+
+   }
+
+   /**
+    * Test if the create controller will create an correct method
+    */
    public function testIfCreateControllerMethodWillReturnValidControllerFunction(): void {
       
+      $schema = SchemaHelper::readSchema("test_underlined", __DIR__.'/../../Testfiles');
+      $path   = app_path(SchemaHelper::extractPathForFile($schema['model'].'Controller', 'Http/Controllers/'.config('ambersive-api.controller_laravel'), 'php'));
+      $method = SchemaHelper::createControllerMethod($schema, $path, 'all');
+
+      $this->assertNotFalse(strpos($method, 'public function all(Request $request){'));
+      $this->assertNotFalse(strpos($method, 'return $api->respond(\'collection\');'));
+
    }
 
+   /**
+    * Test if the test files will be created
+    */
    public function testIfCreateTestWillCreateATestFile(): void {
       
+      $tests = SchemaHelper::createTests("test_underlined", __DIR__.'/../../Testfiles');
+
+      $this->assertTrue($tests);
+      $this->assertTrue(File::exists(base_path("tests/Unit/Models/Test/TestModelTest.php")));
+      $this->assertTrue(File::exists(base_path("tests/Feature/Controllers/Test/TestControllerTest.php")));
+
+
    }
 
+   /**
+    * Test if policy files will be created
+    */
    public function testIfCreatePolicyWillCreateAPolicyFile(): void {
       
+      $polices = SchemaHelper::createPolicy("test_underlined", __DIR__.'/../../Testfiles');
+
+      $this->assertTrue($polices);
+      $this->assertTrue(File::exists(app_path("Policies/Test/TestPolicy.php")));
+
    }
 
    public function testIfUpdateAuthServiceProviderWillUpdateTheFile():void {
       
+      $schema = SchemaHelper::readSchema("test_underlined", __DIR__.'/../../Testfiles');
+      SchemaHelper::updateAuthServiceProvider([]);
+      
+
+      $polices = SchemaHelper::createPolicy("test_underlined", __DIR__.'/../../Testfiles');
+
+      $modelPolicyMapping = [];
+      $modelPolicyMapping[data_get($schema, 'model')] = data_get($schema, 'policy');
+
+      $fingerprint = hash_file('md5',app_path("Providers/AuthServiceProvider.php"));
+
+      SchemaHelper::updateAuthServiceProvider($modelPolicyMapping);
+
+      $fingerprintCompare = hash_file('md5',app_path("Providers/AuthServiceProvider.php"));
+
+      SchemaHelper::updateAuthServiceProvider($modelPolicyMapping);
+
+      $fingerprintCompare2 = hash_file('md5',app_path("Providers/AuthServiceProvider.php"));
+      
+      // Do the assertions
+      $this->assertTrue($polices);
+      $this->assertNotEquals($fingerprintCompare, $fingerprint);
+      $this->assertEquals($fingerprintCompare, $fingerprintCompare2);
+
    }
 
    public function testIfTransformDeepAssocToStringArrayReturnAValidResult(): void {
