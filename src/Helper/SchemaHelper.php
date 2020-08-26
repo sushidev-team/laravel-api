@@ -946,7 +946,6 @@ class SchemaHelper
         $collectionName = array_pop($splitted);
 
         $path   = self::extractPathForFile($schema['resource'], config('ambersive-api.resource_laravel'), 'php');
-
         $folder = self::extractFolderForFile($schema['resource'], config('ambersive-api.resource_laravel'));
 
         // Check if the file is locked

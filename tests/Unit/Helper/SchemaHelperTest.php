@@ -566,7 +566,6 @@ class SchemaHelperTest extends \AMBERSIVE\Tests\TestPackageCase
 
       $success = SchemaHelper::createResource("test_underlined", __DIR__.'/../../Testfiles');    
       $this->assertTrue($success);
-      $this->assertTrue(File::exists("Http/Resources/TestResource.php"));
 
    }
 
@@ -577,7 +576,6 @@ class SchemaHelperTest extends \AMBERSIVE\Tests\TestPackageCase
       
       $success = SchemaHelper::createCollection("test_underlined", __DIR__.'/../../Testfiles');    
       $this->assertTrue($success);
-      $this->assertTrue(File::exists("Http/Resources/TestCollection.php"));
 
    }
 
