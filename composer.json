@@ -15,7 +15,7 @@
         "parsedown/laravel": "^1.2",
         "illuminate/support": "6.*|7.*|8.*",
         "emadadly/laravel-uuid": "1.*",
-        "darkaonline/l5-swagger": "6.*|7.*",
+        "darkaonline/l5-swagger": "6.*|7.*|8.*",
         "spatie/laravel-permission": "^2.36|3.*",
         "tymon/jwt-auth": "1.*"
     },
