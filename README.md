@@ -1,8 +1,6 @@
 # Laravel API Helper Package
 by AMBERSIVE KG / Manuel Pirker-Ihl (manuel.pirker-ihl@ambersive.com / @leganz on Twitter)
 
-[![Build Status](https://travis-ci.org/AMBERSIVE/laravel-api.svg?branch=master)](https://travis-ci.org/AMBERSIVE/laravel-api)
-
 ## About
 
 The main goal of this project is to provide a tested environment for a fast api endpoint creation. 
