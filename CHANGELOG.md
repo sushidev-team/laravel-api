@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.5] - 2020-10-04
+### Added
+- Cleanup routine for tests
+### Fixed
+- Removed composer.lock from source
+
 ## [0.1.4] - 2020-09-09
 ### Added
 - Added support for Laravel 8
