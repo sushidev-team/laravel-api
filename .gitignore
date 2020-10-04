@@ -2,3 +2,4 @@ vendor
 .phpunit*
 Test/Test.phpunit
 Http
+composer.lock
