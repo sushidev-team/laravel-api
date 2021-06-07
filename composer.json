@@ -16,7 +16,7 @@
         "illuminate/support": "6.*|7.*",
         "emadadly/laravel-uuid": "1.*",
         "darkaonline/l5-swagger": "^8.0.2",
-        "spatie/laravel-permission": "^2.36|3.*",
+        "spatie/laravel-permission": "^4.2.0",
         "tymon/jwt-auth": "1.*"
     },
     "require-dev": {
